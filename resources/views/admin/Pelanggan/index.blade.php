@@ -324,7 +324,6 @@
                                             <td>{{ $item->gender }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>{{ $item->phone }}</td>
-                                            <td>Tombol Edit & Tombol Hapus</td>
                                             <td>
                                                 <a href="{{ route('pelanggan.edit', $item) }}" class="btn btn-sm btn-warning">
                                                     <svg  class="icon icon-xs me-2" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
