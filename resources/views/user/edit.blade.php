@@ -1,61 +1,72 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-
-    <div class="container py-4">
-        <!-- Breadcrumb & Navigation -->
-        <small class="text-muted d-block mb-2">
-            / User / Edit User
-        </small>
-        
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h2 class="fw-bold mb-1">Edit User</h2>
-                <p class="text-muted mb-0">Form untuk memperbarui data user.</p>
-            </div>
-            <div>
-                <a href="{{ route('user.index') }}" class="btn btn-dark px-4">
-                    Kembali
-                </a>
+@extends('layouts.admin.app')
+@section('content')
+        <div class="py-4">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="#">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">User</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tambah User</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between w-100 flex-wrap">
+                <div class="mb-3 mb-lg-0">
+                    <h1 class="h4">Tambah User</h1>
+                    <p class="mb-0">Form untuk menambahkan data pelanggan baru.</p>
+                </div>
+                <div>
+                    <a href="{{ route('user.index') }}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
+                </div>
             </div>
         </div>
 
-        <!-- Form Edit User -->
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
-                <form action="{{ route('user.update', $user->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    
-                    <div class="row g-3">
-                        <!-- Input Name -->
-                        <div class="col-md-6">
-                            <label for="name" class="form-label text-secondary fw-semibold">Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $user->name) }}" required>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card border-0 shadow components-section">
+                    <div class="card-body">
+                        <form action="{{route('user.update', $user->id)}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="row mb-4">
+                                <div class="col-lg-4 col-sm-6">
+                                    <!-- Name -->
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" id="name" class="form-control" name="name" value="{{ $user->name }}" required>
+                                    </div>
+                                </div>
 
-                        <!-- Input Password (Opsional saat Edit) -->
-                        <div class="col-md-6">
-                            <label for="password" class="form-label text-secondary fw-semibold">Password <small class="text-muted">(Kosongkan jika tidak ingin diubah)</small></label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <!-- Email -->
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" id="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                                    </div>
+                                </div>
 
-                        <!-- Input Email -->
-                        <div class="col-md-6">
-                            <label for="email" class="form-label text-secondary fw-semibold">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $user->email) }}" required>
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <!-- Password -->
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="Kosongkan jika tidak diubah">
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div class="">
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        <a href="{{ route('user.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+@endsection
